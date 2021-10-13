@@ -37,7 +37,8 @@ app.MapPost("/searchOfferings", ( string searchString) =>
 IEnumerable<Offering> SearchOfferings(string searchString)
 {
     var result  = new List<Offering>();
-    searchString.Split(' ').Select(o => 
+    searchString.Remove(' ');
+    searchString.Split(',').Select(o => 
         result.Union(context.Offerings.Where(offering => offering.Title.Contains(searchString))
         .Where(offering => offering.Description.Contains(searchString))
         .Where(offering => offering.Tags.Where(tag => tag.Tag.Contains(searchString)).First() != null).ToList()));
