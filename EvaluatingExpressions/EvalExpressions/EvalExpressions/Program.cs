@@ -28,9 +28,10 @@ app.MapPost("/api/evaluate", (Expression term) => {
     if (checkRegex(term.expression))
     {
         variables.ForEach(v => { expression = expression.Replace(Char.Parse(v.name), Char.Parse(v.value.ToString())); });
-        return Convert.ToDouble(new DataTable().Compute(expression, null));
+        double result = Convert.ToDouble(new DataTable().Compute(expression, null));
+        return Results.Ok((expression,result));
     }
-    return 400;
+    return Results.BadRequest();
 });
 
 bool checkRegex(string equasion)
