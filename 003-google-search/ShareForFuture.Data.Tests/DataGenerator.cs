@@ -1,4 +1,8 @@
-﻿namespace ShareForFuture.Data.Tests;
+﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
+using Bogus.Extensions;
+
+namespace ShareForFuture.Data.Tests;
 
 internal static class DataGenerator
 {

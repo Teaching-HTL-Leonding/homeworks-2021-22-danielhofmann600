@@ -20,7 +20,10 @@ builder.Services.AddHealthChecks()
     .AddDbContextCheck<S4fDbContext>("UserGroupsAvailable", 
         customTestQuery: async (context, _) => await context.UserGroups.CountAsync() == 4);
 
+builder.Services.AddScoped<DemoDataGenerator>();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
@@ -44,5 +47,12 @@ IEnumerable<Offering> SearchOfferings(string searchString)
         .Where(offering => offering.Tags.Where(tag => tag.Tag.Contains(searchString)).First() != null).ToList()));
     return result;
 }
+
+app.MapPost("/fill", async (DemoDataGenerator generator) =>
+{
+    await generator.ClearAll();
+    await generator.Generate();
+    return Results.Ok();
+});
 
 app.Run();
