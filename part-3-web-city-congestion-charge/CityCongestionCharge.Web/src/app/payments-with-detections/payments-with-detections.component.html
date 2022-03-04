@@ -1,0 +1,27 @@
+<h1>Payments With Detections</h1>
+
+<!-- Todo: Add necessary data binding -->
+
+<table>
+    <thead>
+        <tr>
+            <th class="left">License Plate</th>
+            <th class="right">Paid Amount</th>
+            <th class="left">Detection dates</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let payment of payments">
+        <!-- Repeat the following tr-block for each payment -->
+        <tr>
+            <td class="left">{{payment.licensePlate}}</td>
+            <td class="right">{{payment.paidAmount}}</td>
+            <td class="left">
+                <!-- Repeat the following div-block for each detection of the payment -->
+                <div *ngFor="let detection of payment.detectionDetails" class="detection">
+                    {{detection.taken}}
+                    {{detection.multipleCarsOnOneDetection}}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
