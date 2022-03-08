@@ -1,10 +1,9 @@
 <h1>Payment List</h1>
 
-<!-- Todo: Add necessary data binding -->
 
 <form fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start start">
     <div>
-        <label for="bike-type">Payment type:</label>
+        <label for="payment-type">Payment type:</label>
         <select name="payment-type" id="payment-type">
             <option [ngValue]="undefined"></option>
             <option [ngValue]="0">Cash</option>
@@ -35,13 +34,12 @@
         </tr>
     </thead>
     <tbody>
-        <!-- Repeat the following tr-block for each payment -->
-        <tr>
-            <td class="left">...<!-- Add license plate here --></td>
-            <td class="centered">...<!-- Add payment type here  (you can use getPaymentTypeDescription if you want) --></td>
-            <td class="centered">...<!-- Add paid-for-date here. Try to format it nicely. --></td>
-            <td class="left">...<!-- Add paying person here --></td>
-            <td class="right">...<!-- Add paid amount here. Try to format it nicely. --></td>
+        <tr *ngFor="let payment of payments">
+            <td class="left">{{payment.licensePlate}}</td>
+            <td class="centered">{{getPaymentTypeDescription(payment.paymentType)}}</td>
+            <td class="centered">{{payment.paidForDate}}</td>
+            <td class="left">{{payment.payingPerson}}</td>
+            <td class="right">{{payment.paidAmount}}</td>
         </tr>
     </tbody>
 </table>

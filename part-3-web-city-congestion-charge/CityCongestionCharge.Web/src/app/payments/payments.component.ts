@@ -14,9 +14,11 @@ import {PaymentResultDto, PaymentType, PaymentWithDetectionDto} from "../model";
 export class PaymentsComponent implements OnInit {
 
   payments: PaymentResultDto[] = [];
-  bikeType: PaymentType;
+  paymentType: PaymentType;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.paymentType = 0;
+  }
 
   ngOnInit(): void {
     const p = this.http.get<PaymentResultDto[]>("https://localhost:7182/api/Payments");
